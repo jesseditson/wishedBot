@@ -55,12 +55,12 @@ app.all('/:image/:message',function(req,res) {
             '-background','transparent',
             '-fill','white',
             '-gravity','center',
-            '-size',features.width+'x'+features.height,
+            '-size',w+'x'+h,
             "caption:"+msg,
             output,
             '+swap',
             '-gravity','south',
-            '-size',features.width+'x',
+            '-size',w+'x',
             '-composite',output
           ];
       im.convert(args, function(){
