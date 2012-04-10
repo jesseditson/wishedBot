@@ -7,8 +7,6 @@
 # <above> on <username> - Judges that person instead of making arbitrary judgement
 #
 
-captionify = require('../modules/captionify.js');
-
 module.exports = (robot) ->
 	robot.respond /(?:pass\s)?judge(?:ment)?(?:\son)?(?:\s([\w\s]+))?$/i, (msg) ->
 		dreddArray = [
