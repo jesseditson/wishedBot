@@ -22,12 +22,7 @@ module.exports = (robot) ->
 		image = msg.random dreddArray
 		hasUser = !!msg.match[1]
 		r = Math.floor(Math.random() * 9)
-		if r <= 3
-			verdict = "GUILTY"
-		else if r <= 7
-			verdict = "NOT GUILTY"
-		else
-			verdict = "I AM THE LAW"
+		
 		if(!hasUser)
 			connector = " ARE "
 		else
