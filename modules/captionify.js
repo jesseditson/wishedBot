@@ -41,27 +41,29 @@ app.all('/:image/:message',function(req,res) {
       output = "/tmp/" + sha1(image+msg) + '.jpg';
   msg = decodeURIComponent(msg).toUpperCase();
   download(image, output, function(){
-    var args = [
-      '-strokewidth','2',
-      '-stroke','black',
-      '-background','transparent',
-      '-fill','white',
-      '-gravity','center',
-      '-size','500x100',
-      "caption:"+msg,
-      output,
-      '+swap',
-      '-gravity','south',
-      '-composite',output
-    ];
-    console.log(args.join(' '));
-    im.convert(args, function(){
-      fs.readFile(output, function (err, data) {
-        if (err) throw err;
-        res.header('Content-Type','image/jpeg');
-        res.send(data);
+    im.identify(output,function(err,features){
+      var args = [
+        '-strokewidth','2',
+        '-stroke','black',
+        '-background','transparent',
+        '-fill','white',
+        '-gravity','center',
+        '-size',features.width+'x'+features.height,
+        "caption:"+msg,
+        output,
+        '+swap',
+        '-gravity','south',
+        '-size',features.width+'x',
+        '-composite',output
+      ];
+      im.convert(args, function(){
+        fs.readFile(output, function (err, data) {
+          if (err) throw err;
+          res.header('Content-Type','image/jpeg');
+          res.send(data);
+        });
       });
-    })
+    });
   })
 })
 
