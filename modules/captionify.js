@@ -42,6 +42,10 @@ app.all('/:image/:message',function(req,res) {
   msg = decodeURIComponent(msg).toUpperCase();
   download(image, output, function(){
     im.identify(output,function(err,features){
+      if(err){
+        console.error("Error downloading image: %s",err.message);
+        return false;
+      }
       var args = [
         '-strokewidth','2',
         '-stroke','black',
