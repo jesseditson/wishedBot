@@ -42,17 +42,19 @@ app.all('/:image/:message',function(req,res) {
   msg = decodeURIComponent(msg).toUpperCase();
   download(image, output, function(){
     var args = [
+      '-strokewidth','2',
+      '-stroke','black',
+      '-background','transparent',
+      '-fill','white',
+      '-gravity','center',
+      '-size','500x100',
+      "caption:"+msg,
       output,
-      '-strokewidth', '2',
-      '-stroke', 'black',
-      '-fill', 'white',
-      '-pointsize', '50',
-      '-gravity', 'center',
-      '-weight', '800',
-      '-resize', '500x',
-      '-draw', 'text 0,20 ' + msg,
-      output
-    ]
+      '+swap',
+      '-gravity','south',
+      '-composite',output
+    ];
+    console.log(args.join(' '));
     im.convert(args, function(){
       fs.readFile(output, function (err, data) {
         if (err) throw err;

@@ -34,5 +34,5 @@ module.exports = (robot) ->
 		else
 			connector = " IS "
 		if verdict != "I AM THE LAW"
-			verdict = user + connector + verdict    
-		return 'http://jesseditson.com:7777/' + encodeURIComponent(image) + '/' + encodeURIComponent(verdict);
+			verdict = user + connector + verdict
+		msg.send 'http://jesseditson.com:7777/' + encodeURIComponent(image) + '/' + encodeURIComponent(verdict);
