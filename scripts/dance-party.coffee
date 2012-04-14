@@ -28,5 +28,6 @@ dances = [
 ]
 
 module.exports = (robot) ->
-  robot.hear /.*(dance party).*/i, (msg) ->
-    msg.send msg.random dances
+  robot.hear /dance party\s*(\d+)?/i, (msg) ->
+    many=Array(parseInt msg.match[1] or 1)
+    msg.send msg.random dances for n in many
